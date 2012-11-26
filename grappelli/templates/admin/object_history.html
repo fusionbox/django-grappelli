@@ -31,7 +31,7 @@
                     {% for action in action_list %}
                         <tr>
                             <th scope="grp-row">{{ action.action_time|date:_("DATETIME_FORMAT") }}</th>
-                            <td>{{ action.user.username }}{% if action.user.get_full_name %} ({{ action.user.get_full_name }}){% endif %}</td>
+                            <td>{% filter force_escape %}{% firstof action.user.get_username action.user.username %}{% endfilter %}{% if action.user.get_full_name %} ({{ action.user.get_full_name }}){% endif %}</td>
                             <td>
                             {% ifequal forloop.counter 1 %}
                                 {% trans "Created object" %}
